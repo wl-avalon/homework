@@ -23,7 +23,7 @@ class AddHomeworkService
             return false;
         }
         $uuidList           = explode(',', $idResponse['data']);
-        Assert::isTrue(count($uuidList) < count($homeworkContent) + 1, "网络繁忙,请稍后再试", "获取作业ID失败");
+        Assert::isTrue(count($uuidList) === count($homeworkContent) + 1, "网络繁忙,请稍后再试", "获取作业ID失败");
         $homeworkRecordUuid     = array_shift($uuidList);
 
         $homeworkRecordBeanData = [

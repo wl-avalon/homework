@@ -18,7 +18,7 @@ class HomeworkRecordModel
 
     public static function getDB(){
         if(is_null(self::$db_school)){
-            self::$db_school = \Yii::$app->db_school_admin;
+            self::$db_school = \Yii::$app->db_homework;
         }
         return self::$db_school;
     }
