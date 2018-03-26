@@ -1,8 +1,8 @@
 <?php
 /**
  * Create by script:createSqlBean.php
- * Date is:2018-03-13
- * Time is:09:59:36
+ * Date is:2018-03-26
+ * Time is:11:24:21
  */
 
 namespace app\modules\models\beans;

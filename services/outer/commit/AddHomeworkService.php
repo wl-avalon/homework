@@ -17,7 +17,7 @@ use sp_framework\components\Assert;
 
 class AddHomeworkService
 {
-    public static function addHomework($creatorUuid, $homeworkContent, $homeworkDate){
+    public static function addHomework($creatorUuid, $homeworkContent, $class, $subject, $homeworkName){
         $idResponse         = IDAllocApi::batch(count($homeworkContent) + 1);
         if(empty($idResponse['data'])){
             return false;
@@ -29,8 +29,11 @@ class AddHomeworkService
         $homeworkRecordBeanData = [
             'uuid'              => $homeworkRecordUuid,
             'creator_uuid'      => $creatorUuid,
+            'class'             => $class,
+            'subject'           => $subject,
+            'homework_name'     => $homeworkName,
             'homework_status'   => HomeworkRecordBeanConst::HOMEWORK_STATUS_CREATE_DONE,
-            'homework_date'     => $homeworkDate,
+            'homework_date'     => date('Y-m-d'),
             'create_time'       => date('Y-m-d H:i:s'),
         ];
         $homeworkRecordBean = new HomeworkRecordBean($homeworkRecordBeanData);
@@ -39,7 +42,7 @@ class AddHomeworkService
         $i = 0;
         $homeworkItemBeanList = [];
         foreach($homeworkContent as $homeworkContentItem){
-            $content = trim($homeworkContentItem['content']);
+            $content = trim($homeworkContentItem);
             $homeworkContent = [
                 'content' => $content,
             ];

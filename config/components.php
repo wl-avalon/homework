@@ -32,9 +32,9 @@ return [
             ],
         ],
     ],
-    'db_school_admin' => [
-        'dsn'           => 'mysql:host=123.56.156.172; dbname=school_admin',
-        'username'      => 'school_admin_rd',
+    'db_homework' => [
+        'dsn'           => 'mysql:host=123.56.156.172; dbname=homework',
+        'username'      => 'homework_rd',
         'password'      => 'Wzj769397',
         'class'         => 'yii\db\Connection',
         'charset'       => 'utf8',
