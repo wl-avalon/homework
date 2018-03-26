@@ -1,6 +1,6 @@
 <?php
 $config = [
-    'id' => 'school-admin',
+    'id' => 'homework',
     'timeZone'=>'Asia/Shanghai',
     'basePath' => dirname(dirname(__DIR__)),
     'bootstrap' => ['log'],

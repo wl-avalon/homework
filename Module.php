@@ -11,7 +11,7 @@ use sp_framework\SpModule;
 
 class Module extends \yii\base\Module {
     public function init() {
-        SpModule::setModuleName("school-admin");
+        SpModule::setModuleName("homework");
         $class = get_class($this);
         if (($pos = strrpos($class, '\\')) !== false) {
             $this->controllerNamespace = substr($class, 0, $pos) . '\\controllers';
