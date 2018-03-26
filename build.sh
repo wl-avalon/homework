@@ -1,5 +1,5 @@
 #!/bin/sh
-MODULE_NAME="school-admin"
+MODULE_NAME="homework"
 MODULE_DIR_PATH="output/application/$MODULE_NAME/modules"
 WEB_DIR_PATH="output/application/$MODULE_NAME/web"
 CONSOLE_DIR_PATH="output/application/$MODULE_NAME/console"
