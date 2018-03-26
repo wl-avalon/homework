@@ -9,7 +9,7 @@ $config = [
     ],
     'controllerNamespace' => 'app\modules\controllers',
     'modules' => [
-        'school-admin' => ['class' => 'app\modules\Module'],
+        'homework' => ['class' => 'app\modules\Module'],
     ],
     'components' => include(__DIR__ . '/components.php'),
     'params' => include (__DIR__ . '/params.php'),
