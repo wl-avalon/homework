@@ -9,6 +9,7 @@
 namespace app\modules\services\outer\query;
 use app\modules\apis\SchoolAdminApi;
 use app\modules\models\beans\HomeworkItemBean;
+use app\modules\models\beans\HomeworkRecordBean;
 use app\modules\models\HomeworkItemModel;
 use app\modules\models\HomeworkRecordModel;
 use app\modules\models\HomeworkScheduleModel;
@@ -20,17 +21,20 @@ class GetChildHomeworkBriefService
 
         $homeworkRecordList     = HomeworkRecordModel::queryTodayHomeworkRecordByClassUuidList([$childInfo['classUuid']]);
         $homeworkRecordUuidList = [];
+        /** @var HomeworkRecordBean[]  $homeworkRecordMap*/
+        $homeworkRecordMap      = [];
         foreach($homeworkRecordList as $homeworkRecordBean){
             $homeworkRecordUuidList[] = $homeworkRecordBean->getUuid();
+            $homeworkRecordMap[$homeworkRecordBean->getUuid()]  = $homeworkRecordBean;
         }
         $homeworkItemList           = HomeworkItemModel::queryHomeworkItemByRecordUuidList($homeworkRecordUuidList);
         $homeworkItemUuidList       = [];
         $homeworkItemMap            = [];
-        $homeworkItemMapToRecord    = [];
+        $homeworkItemMapToSubject   = [];
         foreach($homeworkItemList as $itemBean){
             $homeworkItemUuidList[] = $itemBean->getUuid();
             $homeworkItemMap[$itemBean->getUuid()]  = $itemBean;
-            $homeworkItemMapToRecord[$itemBean->getUuid()] = $itemBean->getHomeworkUuid();
+            $homeworkItemMapToSubject[$itemBean->getUuid()] = $homeworkRecordMap[$itemBean->getHomeworkUuid()]->getSubject();
         }
 
         /** @var HomeworkItemBean[]  $doneHomeworkItemList*/
@@ -51,12 +55,14 @@ class GetChildHomeworkBriefService
             $result['notDone'][] = [
                 'uuid'      => $itemBean->getUuid(),
                 'content'   => $itemBean->getHomeworkContent(),
+                'subject'   => $homeworkItemMapToSubject[$itemBean->getUuid()],
             ];
         }
         foreach($doneHomeworkItemList as $homeworkItemUuid  => $itemBean){
             $result['hasDone'][] = [
                 'uuid'      => $itemBean->getUuid(),
                 'content'   => $itemBean->getHomeworkContent(),
+                'subject'   => $homeworkItemMapToSubject[$itemBean->getUuid()],
             ];
         }
         return $result;
