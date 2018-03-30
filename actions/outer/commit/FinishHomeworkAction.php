@@ -19,7 +19,7 @@ class FinishHomeworkAction extends BaseAction
 
     protected function formatParams()
     {
-        $this->parentUuid   = $this->get('parentUuid');
+        $this->parentUuid   = $this->get('memberID');
         $this->childUuid    = $this->get('childUuid');
         $this->homeworkUuid = $this->get('homeworkUuid');
         $this->minutes      = $this->get('minutes');
