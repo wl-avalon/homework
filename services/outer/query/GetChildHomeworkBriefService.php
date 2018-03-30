@@ -41,7 +41,7 @@ class GetChildHomeworkBriefService
         $doneHomeworkItemList       = [];
         /** @var HomeworkItemBean[]  $waitWorkHomeworkItemMap*/
         $waitWorkHomeworkItemMap    = $homeworkItemMap;
-        $homeworkScheduleList       = HomeworkScheduleModel::queryHomeworkItemByRecordUuidList($parentUuid, $homeworkItemUuidList);
+        $homeworkScheduleList       = HomeworkScheduleModel::queryScheduleByChildAndItemUuidList($parentUuid, $homeworkItemUuidList);
         foreach($homeworkScheduleList as $scheduleBean){
             unset($waitWorkHomeworkItemMap[$scheduleBean->getHomeworkItemUuid()]);
             $doneHomeworkItemList[] = $homeworkItemMap[$scheduleBean->getHomeworkItemUuid()];

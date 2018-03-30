@@ -14,6 +14,7 @@ class CommitController extends Controller
     public function actions(){
         return [
             "commitHomework" => 'app\modules\actions\outer\commit\CommitHomeworkAction',
+            "finishHomework" => 'app\modules\actions\outer\commit\FinishHomeworkAction',
         ];
     }
 }

@@ -52,7 +52,7 @@ class HomeworkScheduleModel
      * @return HomeworkScheduleBean[]
      * @throws SpException
      */
-    public static function queryHomeworkItemByRecordUuidList($childUuid, $homeworkItemUuidList){
+    public static function queryScheduleByChildAndItemUuidList($childUuid, $homeworkItemUuidList){
         $aWhere = [
             'homework_item_uuid'    => $homeworkItemUuidList,
             'student_uuid'          => $childUuid,
@@ -64,5 +64,19 @@ class HomeworkScheduleModel
             throw new SpException(SpErrorCodeConst::INSERT_DB_ERROR, 'select db error,message is:' . $e->getMessage(), "网络繁忙,请稍后再试");
         }
         return self::convertDbToBeans($aData);
+    }
+
+    public static function queryScheduleByChildAndItemUuid($childUuid, $homeworkItemUuid){
+        $aWhere = [
+            'homework_item_uuid'    => $homeworkItemUuid,
+            'student_uuid'          => $childUuid,
+        ];
+
+        try{
+            $aData = (new Query())->select([])->where($aWhere)->from(self::TABLE_NAME)->createCommand(self::getDB())->queryOne();
+        }catch(\Exception $e){
+            throw new SpException(SpErrorCodeConst::INSERT_DB_ERROR, 'select db error,message is:' . $e->getMessage(), "网络繁忙,请稍后再试");
+        }
+        return self::convertDbToBean($aData);
     }
 }
