@@ -15,13 +15,13 @@ use yii\db\Query;
 class HomeworkRecordModel
 {
     const TABLE_NAME = "homework_record";
-    private static $db_school;
+    private static $db_homework;
 
     public static function getDB(){
-        if(is_null(self::$db_school)){
-            self::$db_school = \Yii::$app->db_homework;
+        if(is_null(self::$db_homework)){
+            self::$db_homework = \Yii::$app->db_homework;
         }
-        return self::$db_school;
+        return self::$db_homework;
     }
 
     public static function convertDbToBeans($aData){

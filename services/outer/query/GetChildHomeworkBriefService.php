@@ -44,17 +44,17 @@ class GetChildHomeworkBriefService
         }
 
         $result = [
-            'not_done'  => [],
-            'has_done'  => [],
+            'notDone'  => [],
+            'hasDone'  => [],
         ];
         foreach($waitWorkHomeworkItemMap as $homeworkItemUuid => $itemBean){
-            $result['not_done'][] = [
+            $result['notDone'][] = [
                 'uuid'      => $itemBean->getUuid(),
                 'content'   => $itemBean->getHomeworkContent(),
             ];
         }
         foreach($doneHomeworkItemList as $homeworkItemUuid  => $itemBean){
-            $result['has_done'][] = [
+            $result['hasDone'][] = [
                 'uuid'      => $itemBean->getUuid(),
                 'content'   => $itemBean->getHomeworkContent(),
             ];
