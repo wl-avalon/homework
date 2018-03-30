@@ -47,7 +47,7 @@ class AddHomeworkService
                 'content' => $content,
             ];
             $homeworkItemBeanData = [
-                'uuid'              => $uuidList[$i],
+                'uuid'              => $uuidList[$i++],
                 'homework_uuid'     => $homeworkRecordUuid,
                 'creator_uuid'      => $creatorUuid,
                 'homework_content'  => json_encode($homeworkContent),

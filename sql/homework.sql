@@ -31,14 +31,16 @@ CREATE TABLE `homework_item` (
 
 CREATE TABLE `homework_schedule` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '主键,自增ID',
-  `uuid` VARCHAR(100) DEFAULT '' COMMENT '作业条目唯一ID',
-  `homework_item_uuid` VARCHAR(100) DEFAULT '' COMMENT '作业记录ID',
+  `uuid` VARCHAR(100) DEFAULT '' COMMENT '唯一ID',
+  `homework_item_uuid` VARCHAR(100) DEFAULT '' COMMENT '作业条目ID',
+  `student_uuid` VARCHAR(100) DEFAULT '' COMMENT '学生ID',
   `recorder_uuid` VARCHAR(100) DEFAULT '' COMMENT '记录者ID',
   `cost_time` INT(11) DEFAULT 0 COMMENT '花费时间,单位:分钟',
   `create_time` TIMESTAMP DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   `update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_uuid` (`uuid`),
+  UNIQUE KEY `idx_student_homework_item_uuid` (`student_uuid`, `homework_item_uuid`),
   KEY `idx_homework_item_uuid`(`homework_item_uuid`),
   KEY `idx_recorder_uuid` (`recorder_uuid`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT = '作业进度表';

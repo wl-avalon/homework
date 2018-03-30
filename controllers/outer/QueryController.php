@@ -13,7 +13,7 @@ class QueryController extends Controller
 {
     public function actions(){
         return [
-            "getRandomQuestionByCondition"  => 'app\modules\actions\outer\query\GetRandomQuestionByConditionAction',
+            'getChildHomeworkBrief'      => 'app\modules\actions\outer\query\GetChildHomeworkBriefAction',
         ];
     }
 }

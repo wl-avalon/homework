@@ -15,4 +15,11 @@ return [
         'timeout'       => 10000,
         'conntimeout'   => 5000,
     ],
+    'school-admin' => [
+        'domain'    => 'http://123.56.156.172:81',
+        'apis' => [
+            'getChildList'              => '/study-palace/school-admin/query/getChildList',
+            'getStudentByStudentUuid'   => '/study-palace/school-admin/query/getStudentByStudentUuid',
+        ],
+    ],
 ];

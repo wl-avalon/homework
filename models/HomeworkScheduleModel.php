@@ -10,6 +10,7 @@ namespace app\modules\models;
 use app\modules\models\beans\HomeworkScheduleBean;
 use sp_framework\components\SpException;
 use sp_framework\constants\SpErrorCodeConst;
+use yii\db\Query;
 
 class HomeworkScheduleModel
 {
@@ -43,5 +44,25 @@ class HomeworkScheduleModel
             throw new SpException(SpErrorCodeConst::INSERT_DB_ERROR, "insert db error, message is:" . $e->getMessage(), "网络繁忙,请稍后再试");
         }
         return $rowNum;
+    }
+
+    /**
+     * @param $homeworkItemUuidList
+     * @param $childUuid
+     * @return HomeworkScheduleBean[]
+     * @throws SpException
+     */
+    public static function queryHomeworkItemByRecordUuidList($childUuid, $homeworkItemUuidList){
+        $aWhere = [
+            'homework_item_uuid'    => $homeworkItemUuidList,
+            'student_uuid'          => $childUuid,
+        ];
+
+        try{
+            $aData = (new Query())->select([])->where($aWhere)->from(self::TABLE_NAME)->createCommand(self::getDB())->queryAll();
+        }catch(\Exception $e){
+            throw new SpException(SpErrorCodeConst::INSERT_DB_ERROR, 'select db error,message is:' . $e->getMessage(), "网络繁忙,请稍后再试");
+        }
+        return self::convertDbToBeans($aData);
     }
 }
