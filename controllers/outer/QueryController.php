@@ -15,7 +15,7 @@ class QueryController extends Controller
         return [
             'getChildHomeworkBrief'         => 'app\modules\actions\outer\query\GetChildHomeworkBriefAction',
             'getTodayLayoutHomeworkList'    => 'app\modules\actions\outer\query\GetTodayLayoutHomeworkListAction',
-            'getHomeworkRecordDetail'       => 'app\modules\actions\outer\query\GetHomeworkRecordDetailAction',
+            'getHomeworkItemDetail'         => 'app\modules\actions\outer\query\GetHomeworkItemDetailAction',
         ];
     }
 }

@@ -79,4 +79,22 @@ class HomeworkScheduleModel
         }
         return self::convertDbToBean($aData);
     }
+
+    /**
+     * @param $homeworkItemUuid
+     * @return HomeworkScheduleBean[]
+     * @throws SpException
+     */
+    public static function queryScheduleByHomeworkItemUuid($homeworkItemUuid){
+        $aWhere = [
+            'homework_item_uuid'    => $homeworkItemUuid,
+        ];
+
+        try{
+            $aData = (new Query())->select([])->where($aWhere)->from(self::TABLE_NAME)->createCommand(self::getDB())->queryAll();
+        }catch(\Exception $e){
+            throw new SpException(SpErrorCodeConst::INSERT_DB_ERROR, 'select db error,message is:' . $e->getMessage(), "网络繁忙,请稍后再试");
+        }
+        return self::convertDbToBeans($aData);
+    }
 }

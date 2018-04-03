@@ -24,4 +24,11 @@ class SchoolAdminApi
         ];
         return ApiContext::get('school-admin', 'getStudentByStudentUuid', $params)->throwWhenFailed();
     }
+
+    public static function getStudentOfClass($classUuid){
+        $params = [
+            'classUuid'    => $classUuid,
+        ];
+        return ApiContext::get('school-admin', 'getStudentOfClass', $params)->throwWhenFailed();
+    }
 }

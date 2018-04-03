@@ -19,6 +19,7 @@ return [
         'domain'    => 'http://123.56.156.172:81',
         'apis' => [
             'getChildList'              => '/study-palace/school-admin/query/getChildList',
+            'getStudentOfClass'         => '/study-palace/school-admin/query/getStudentOfClass',
             'getStudentByStudentUuid'   => '/study-palace/school-admin/query/getStudentByStudentUuid',
         ],
     ],
