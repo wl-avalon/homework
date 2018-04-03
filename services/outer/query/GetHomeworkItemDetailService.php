@@ -37,14 +37,11 @@ class GetHomeworkItemDetailService
             $sumCostTime += $scheduleBean->getCostTime();
             unset($studentInfoMap[$scheduleBean->getStudentUuid()]);
         }
-        foreach($scheduleBeanList as $scheduleBean){
-            if(!isset($studentInfoMap[$scheduleBean->getStudentUuid()])){
-                continue;
-            }
+        foreach($studentInfoMap as $studentInfo){
             $notDone[] = [
-                'studentUuid'   => $scheduleBean->getStudentUuid(),
-                'studentName'   => $studentInfoMap[$scheduleBean->getStudentUuid()]['studentName'],
-                'costTime'      => $scheduleBean->getCostTime(),
+                'studentUuid'   => $studentInfo['studentUuid'],
+                'studentName'   => $studentInfo['studentName'],
+                'costTime'      => 0,
             ];
         }
         return [
