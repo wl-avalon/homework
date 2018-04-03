@@ -26,7 +26,6 @@ class CommitHomeworkAction extends BaseAction
         $this->subject          = $this->get('subject');
         $this->homeworkName     = $this->get('homeworkName');
         $this->homeworkContent  = json_decode($this->get('homeworkList'), true);
-        $this->creatorUuid      = -1;
         Assert::isTrue(!empty($this->creatorUuid), "创建者不能为空");
         Assert::isTrue(!empty($this->homeworkContent), "作业内容不能为空");
     }
