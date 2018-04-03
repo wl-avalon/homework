@@ -13,7 +13,8 @@ class QueryController extends Controller
 {
     public function actions(){
         return [
-            'getChildHomeworkBrief'      => 'app\modules\actions\outer\query\GetChildHomeworkBriefAction',
+            'getChildHomeworkBrief'         => 'app\modules\actions\outer\query\GetChildHomeworkBriefAction',
+            'getTodayLayoutHomeworkList'    => 'app\modules\actions\outer\query\GetTodayLayoutHomeworkListAction',
         ];
     }
 }

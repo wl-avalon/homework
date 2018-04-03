@@ -48,14 +48,18 @@ class HomeworkRecordModel
 
     /**
      * @param $classUuidList
+     * @param $creatorUuid
      * @return HomeworkRecordBean[]
      * @throws SpException
      */
-    public static function queryTodayHomeworkRecordByClassUuidList($classUuidList){
+    public static function queryTodayHomeworkRecordByClassUuidList($classUuidList, $creatorUuid = ''){
         $aWhere = [
             'class'         => $classUuidList,
             'homework_date' => date('Y-m-d'),
         ];
+        if(!empty($creatorUuid)){
+            $aWhere['creator_uuid'] = $creatorUuid;
+        }
 
         try{
             $aData = (new Query())->select([])->where($aWhere)->from(self::TABLE_NAME)->createCommand(self::getDB())->queryAll();
