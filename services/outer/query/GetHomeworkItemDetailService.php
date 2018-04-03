@@ -15,7 +15,7 @@ use app\modules\models\HomeworkScheduleModel;
 class GetHomeworkItemDetailService
 {
     public static function getHomeworkItemDetail($classUuid, $homeworkItemUuid){
-        $studentInfoList    = SchoolAdminApi::getStudentOfClass($classUuid)->toArray();
+        $studentInfoList    = SchoolAdminApi::getStudentOfClass($classUuid)->toArray()['studentList'];
         $studentInfoMap     = [];
         foreach($studentInfoList as $studentInfo){
             $studentInfoMap[$studentInfo['studentUuid']] = $studentInfo;
@@ -50,7 +50,7 @@ class GetHomeworkItemDetailService
         return [
             'hasDone'       => $hasDone,
             'notDone'       => $notDone,
-            'averageTime'   => intval($sumCostTime / $count),
+            'averageTime'   => $count > 0 ? intval($sumCostTime / $count) : 0,
         ];
     }
 }
