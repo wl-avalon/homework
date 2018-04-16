@@ -57,6 +57,12 @@ class HomeworkRecordModel
             'class'         => $classUuidList,
             'homework_date' => date('Y-m-d'),
         ];
+        if(date('w') == 0){
+            $aWhere['homework_date'] = [date('Y-m-d', time() - 86400 * 2), date('Y-m-d', time() - 86400), date('Y-m-d')];
+        }elseif(date('w') == 6){
+            $aWhere['homework_date'] = [date('Y-m-d', time() - 86400), date('Y-m-d')];
+        }
+        
         if(!empty($creatorUuid)){
             $aWhere['creator_uuid'] = $creatorUuid;
         }
