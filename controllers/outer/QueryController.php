@@ -16,6 +16,7 @@ class QueryController extends Controller
             'getChildHomeworkBrief'         => 'app\modules\actions\outer\query\GetChildHomeworkBriefAction',
             'getTodayLayoutHomeworkList'    => 'app\modules\actions\outer\query\GetTodayLayoutHomeworkListAction',
             'getHomeworkItemDetail'         => 'app\modules\actions\outer\query\GetHomeworkItemDetailAction',
+            'getStudentFinishDetail'        => 'app\modules\actions\outer\query\GetStudentFinishDetailAction',
         ];
     }
 }

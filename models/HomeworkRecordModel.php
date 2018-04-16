@@ -62,10 +62,35 @@ class HomeworkRecordModel
         }elseif(date('w') == 6){
             $aWhere['homework_date'] = [date('Y-m-d', time() - 86400), date('Y-m-d')];
         }
-        
+
         if(!empty($creatorUuid)){
             $aWhere['creator_uuid'] = $creatorUuid;
         }
+
+        try{
+            $aData = (new Query())->select([])->where($aWhere)->from(self::TABLE_NAME)->createCommand(self::getDB())->queryAll();
+        }catch(\Exception $e){
+            throw new SpException(SpErrorCodeConst::INSERT_DB_ERROR, 'select db error,message is:' . $e->getMessage(), "网络繁忙,请稍后再试");
+        }
+        return self::convertDbToBeans($aData);
+    }
+
+    /**
+     * @param $classUuid
+     * @param $subject
+     * @param $startDate
+     * @param $endDate
+     * @return HomeworkRecordBean[]
+     * @throws SpException
+     */
+    public static function queryHomeworkRecordByDateAndClassUuid($classUuid, $subject, $startDate, $endDate){
+        $aWhere = [
+            'AND',
+            ['=', 'class', $classUuid],
+            ['=', 'subject', $subject],
+            ['>=', 'homework_date', $startDate],
+            ['<=', 'homework_date', $endDate],
+        ];
 
         try{
             $aData = (new Query())->select([])->where($aWhere)->from(self::TABLE_NAME)->createCommand(self::getDB())->queryAll();
