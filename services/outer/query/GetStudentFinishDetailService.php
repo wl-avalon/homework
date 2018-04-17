@@ -10,10 +10,12 @@ namespace app\modules\services\outer\query;
 
 
 use app\modules\apis\SchoolAdminApi;
+use app\modules\constants\RedisKey;
 use app\modules\models\beans\HomeworkRecordBean;
 use app\modules\models\HomeworkItemModel;
 use app\modules\models\HomeworkRecordModel;
 use app\modules\models\HomeworkScheduleModel;
+use sp_framework\util\RedisUtil;
 
 class GetStudentFinishDetailService
 {
@@ -58,7 +60,6 @@ class GetStudentFinishDetailService
                 $countData[$date] = [
                     'sumTime'       => 0,
                     'itemCount'     => 0,
-                    'hasData'       => true,
                 ];
             }
             $countData[$date]['sumTime'] += $scheduleBean->getCostTime();
@@ -71,7 +72,6 @@ class GetStudentFinishDetailService
                 $countData[$date] = [
                     'sumTime'       => 0,
                     'itemCount'     => 0,
-                    'hasData'       => false,
                 ];
             }
         }
@@ -83,9 +83,28 @@ class GetStudentFinishDetailService
                 'hasData'       => $data['hasData'],
             ];
         }
+        ksort($result);
 
         return [
-            'studentDetail' => $result,
+            'studentDetail' => array_values($result),
+            'classDetail'   => self::getClassFinishDetail($classUuid, $subject, $startDate),
         ];
+    }
+
+    public static function getClassFinishDetail($classUuid, $subject, $startDate){
+        $redis = RedisUtil::getInstance('redis');
+        $dateMapToClassDetail = [];
+        for($i = 0; $i < 7; $i++){
+            $date = date('Y-m-d', strtotime("+{$i} day", strtotime($startDate)));
+            $redisKey = RedisKey::CLASS_FINISH_DETAIL_DATE . "{$classUuid}_{$subject}_{$date}";
+            $jsonDetail = $redis->get($redisKey);
+            $detail = json_decode($jsonDetail, true);
+            $dateMapToClassDetail[$date] = [
+                'averageTime'   => $detail['averageTime']   ?? 0,
+                'itemCount'     => $detail['sumCount']      ?? 0,
+            ];
+        }
+        ksort($dateMapToClassDetail);
+        return array_values($dateMapToClassDetail);
     }
 }

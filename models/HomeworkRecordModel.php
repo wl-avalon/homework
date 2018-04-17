@@ -99,4 +99,25 @@ class HomeworkRecordModel
         }
         return self::convertDbToBeans($aData);
     }
+
+    /**
+     * @param $classUuid
+     * @param $date
+     * @return HomeworkRecordBean[]
+     * @throws SpException
+     */
+    public static function queryHomeworkRecordByDateAndClassUuidList($classUuid, $date){
+        $aWhere = [
+            'AND',
+            ['=', 'class', $classUuid],
+            ['=', 'homework_date', $date],
+        ];
+
+        try{
+            $aData = (new Query())->select([])->where($aWhere)->from(self::TABLE_NAME)->createCommand(self::getDB())->queryAll();
+        }catch(\Exception $e){
+            throw new SpException(SpErrorCodeConst::INSERT_DB_ERROR, 'select db error,message is:' . $e->getMessage(), "网络繁忙,请稍后再试");
+        }
+        return self::convertDbToBeans($aData);
+    }
 }

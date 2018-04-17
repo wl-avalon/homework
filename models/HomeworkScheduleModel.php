@@ -85,7 +85,7 @@ class HomeworkScheduleModel
      * @return HomeworkScheduleBean[]
      * @throws SpException
      */
-    public static function queryScheduleByHomeworkItemUuid($homeworkItemUuid){
+    public static function queryScheduleByHomeworkItemUuidList($homeworkItemUuid){
         $aWhere = [
             'homework_item_uuid'    => $homeworkItemUuid,
         ];

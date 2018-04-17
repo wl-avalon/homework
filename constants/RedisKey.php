@@ -11,5 +11,5 @@ namespace app\modules\constants;
 
 class RedisKey
 {
-    const SELF_PROXY_IP_LIST = 'self_proxy_ip_list';
+    const CLASS_FINISH_DETAIL_DATE = 'class_finish_detail_date_';
 }

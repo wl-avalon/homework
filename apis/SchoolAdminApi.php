@@ -31,4 +31,12 @@ class SchoolAdminApi
         ];
         return ApiContext::get('school-admin', 'getStudentOfClass', $params)->throwWhenFailed();
     }
+
+    public static function getClassList($pageNo, $pageSize = 20){
+        $params = [
+            'pageNo'    => $pageNo,
+            'pageSize'  => $pageSize,
+        ];
+        return ApiContext::get('school-admin', 'getClassList', $params);
+    }
 }

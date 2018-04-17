@@ -7,18 +7,13 @@
  */
 
 namespace app\modules\commands;
-use app\modules\components\MockData;
-use app\modules\components\SPLog;
-use app\modules\constants\RedisKey;
-use app\modules\library\Proxy;
-use app\modules\services\daemon\process\CreateQuestionDetailService;
-use app\modules\services\daemon\process\TurnMathmlToPngService;
-use app\modules\services\daemon\spider\CreateQuestionService;
-use app\modules\services\daemon\spider\GetProxyIPListService;
-use rrxframework\util\RedisUtil;
+use app\modules\services\daemon\QueryClassFinishDetailService;
 use yii\console\Controller;
 
 class MainController extends Controller
 {
-
+    public function actionQueryClassFinishDetail(){
+        set_time_limit(0);
+        QueryClassFinishDetailService::queryClassFinishDetail();
+    }
 }

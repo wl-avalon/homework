@@ -21,6 +21,7 @@ return [
             'getChildList'              => '/study-palace/school-admin/query/getChildList',
             'getStudentOfClass'         => '/study-palace/school-admin/query/getStudentOfClass',
             'getStudentByStudentUuid'   => '/study-palace/school-admin/query/getStudentByStudentUuid',
+            'getClassList'              => '/study-palace/school-admin/query/getClassList',
         ],
     ],
 ];

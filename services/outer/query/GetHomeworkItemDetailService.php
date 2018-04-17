@@ -21,7 +21,7 @@ class GetHomeworkItemDetailService
             $studentInfoMap[$studentInfo['studentUuid']] = $studentInfo;
         }
 
-        $scheduleBeanList   = HomeworkScheduleModel::queryScheduleByHomeworkItemUuid($homeworkItemUuid);
+        $scheduleBeanList   = HomeworkScheduleModel::queryScheduleByHomeworkItemUuidList($homeworkItemUuid);
 
         $hasDone        = [];
         $notDone        = [];
